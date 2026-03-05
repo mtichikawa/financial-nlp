@@ -362,6 +362,7 @@ class SECFilingParser:
         print(f'  ✅ Saved results to {filepath}')
 
 
+# Generates representative sample filings for demo/test purposes — not a live EDGAR client
 class MockSECFetcher:
     '''Mock SEC filing fetcher (for demo)'''
     
