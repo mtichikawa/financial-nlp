@@ -107,6 +107,7 @@ class FinancialMetricExtractor:
         return ratios
 
 
+# Sentiment label thresholds: score < 0.4 -> negative, 0.4-0.6 -> neutral, > 0.6 -> positive
 class SentimentAnalyzer:
     '''Analyze sentiment in financial text (MD&A, risk factors)'''
     
