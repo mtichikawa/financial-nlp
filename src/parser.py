@@ -71,6 +71,7 @@ class FinancialMetricExtractor:
                     
                     # Check for billion/million multiplier
                     context = text[max(0, match.start()-50):match.end()+20]
+                    # normalise to millions so all metrics share a common unit scale
                     if 'billion' in context.lower():
                         value *= 1000  # Convert to millions
                         
