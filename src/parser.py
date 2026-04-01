@@ -188,6 +188,7 @@ class EntityExtractor:
     def _load_patterns(self) -> Dict[str, re.Pattern]:
         '''Entity extraction patterns'''
         return {
+            # pattern requires legal suffix (Inc., Corp., LLC, Ltd.) — bare company names are not matched
             'company': re.compile(r'\b(?:[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(?:Inc\.|Corp\.|LLC|Ltd\.)', re.IGNORECASE),
             'date': re.compile(r'(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}', re.IGNORECASE),
             'money': re.compile(r'\$[\d,]+(?:\.\d{2})?'),
@@ -448,4 +449,3 @@ def demo():
 
 if __name__ == '__main__':
     demo()
-# style: minor whitespace pass
