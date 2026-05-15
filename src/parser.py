@@ -303,7 +303,7 @@ class SECFilingParser:
                 if len(sentence.strip()) > 50:  # Meaningful length
                     risks.append(sentence.strip())
                     
-        return risks[:10]  # Top 10 risks
+        return risks[:10]  # cap at 10: enough to surface material risks without overwhelming the report
         
     def generate_report(self, parsed_data: Dict) -> str:
         '''Generate human-readable report'''
