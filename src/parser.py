@@ -5,7 +5,7 @@ Extract and analyze financial data from SEC filings
 
 import re
 import json
-from typing import Dict, List, Tuple, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from pathlib import Path
 from datetime import datetime
 import xml.etree.ElementTree as ET
@@ -81,7 +81,7 @@ class FinancialMetricExtractor:
                     
         return metrics
         
-    def calculate_ratios(self, metrics: Dict[str, float]) -> Dict[str, float]:
+    def calculate_ratios(self, metrics: Dict[str, float]: Any) -> Dict[str, float]:
         '''Calculate financial ratios from extracted metrics'''
         ratios = {}
         
