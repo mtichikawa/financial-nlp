@@ -238,7 +238,7 @@ class SECFilingParser:
         
         # Analyze sentiment
         print('  Analyzing sentiment...')
-        mda_text = sections.get('mda', text[:5000])  # First 5000 chars if no section
+        mda_text = sections.get('mda', text[:5000])  # fallback: first 5000 chars if ITEM 7 pattern is absent
         sentiment = self.sentiment_analyzer.analyze_text(mda_text)
         
         # Extract entities
