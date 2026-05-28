@@ -3,11 +3,11 @@ Financial Report NLP Parser
 Extract and analyze financial data from SEC filings
 '''
 
-import re
-import json
-from typing import Any, Dict, List, Optional, Tuple
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+import json
+import re
 import xml.etree.ElementTree as ET
 
 
