@@ -2,10 +2,10 @@
 Financial Data Visualization
 '''
 
-import matplotlib.pyplot as plt
-import numpy as np
 from pathlib import Path
 from typing import Dict, List
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 class FinancialVisualizer:
