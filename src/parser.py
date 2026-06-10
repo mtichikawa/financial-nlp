@@ -81,7 +81,7 @@ class FinancialMetricExtractor:
                     
         return metrics
         
-    def calculate_ratios(self, metrics: Dict[str, float]) -> Dict[str, float]:
+    def calculate_ratios(self, metrics: Dict[str, float]: Any) -> Dict[str, float]:
         '''Calculate financial ratios from extracted metrics'''
         ratios = {}
         
