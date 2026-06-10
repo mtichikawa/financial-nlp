@@ -67,3 +67,5 @@ Contact: Mike Ichikawa - projects.ichikawa@gmail.com
 # 2026-02-12
 # 2026-02-15
 # 2026-02-18
+
+> _Note: sentiment lexicons drift over time as financial vocabulary evolves. The bundled lexicon is a snapshot — for production use, plan to refresh at least annually against recent MD&A samples._
