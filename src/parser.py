@@ -81,7 +81,7 @@ class FinancialMetricExtractor:
                     
         return metrics
         
-    def calculate_ratios(self, metrics: Dict[str, float]: Any) -> Dict[str, float]:
+    def calculate_ratios(self, metrics: Dict[str, float]) -> Dict[str, float]:
         '''Calculate financial ratios from extracted metrics'''
         ratios = {}
         
@@ -365,7 +365,6 @@ class SECFilingParser:
         print(f'  ✅ Saved results to {filepath}')
 
 
-# Generates representative sample filings for demo/test purposes — not a live EDGAR client
 # Generates representative sample filings for demo/test purposes — not a live EDGAR client
 class MockSECFetcher:
     '''Mock SEC filing fetcher (for demo)'''
