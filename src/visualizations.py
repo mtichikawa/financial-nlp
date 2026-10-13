@@ -23,8 +23,10 @@ class FinancialVisualizer:
         fig, ax = plt.subplots(figsize=(12, 6))
         
         # Filter and sort metrics
-        sorted_metrics = sorted(metrics.items(), key=lambda x: x[1], reverse=True)
-        names = [m[0].replace('_', ' ').title() for m, v in sorted_metrics]
+        # EPS is per share, not millions, so it would distort a millions axis
+        in_millions = {m: v for m, v in metrics.items() if m != 'earnings_per_share'}
+        sorted_metrics = sorted(in_millions.items(), key=lambda x: x[1], reverse=True)
+        names = [m.replace('_', ' ').title() for m, v in sorted_metrics]
         values = [v for m, v in sorted_metrics]
         
         colors = plt.cm.viridis(np.linspace(0.3, 0.9, len(names)))

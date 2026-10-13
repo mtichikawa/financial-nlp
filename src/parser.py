@@ -21,39 +21,39 @@ class FinancialMetricExtractor:
         '''Compiled regex patterns for financial metrics'''
         return {
             'revenue': re.compile(
-                r'(?:revenue|sales|net\s+sales).*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'(?:revenue|sales|net\s+sales).*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'net_income': re.compile(
-                r'net\s+income.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'net\s+income.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'earnings_per_share': re.compile(
-                r'earnings\s+per\s+share.*?[\$\s]+([\d,\.]+)',
+                r'earnings\s+per\s+share.*?\$\s*([\d,\.]+)',
                 re.IGNORECASE
             ),
             'gross_profit': re.compile(
-                r'gross\s+profit.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'gross\s+profit.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'operating_income': re.compile(
-                r'operating\s+income.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'operating\s+income.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'total_assets': re.compile(
-                r'total\s+assets.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'total\s+assets.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'total_liabilities': re.compile(
-                r'total\s+liabilities.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'total\s+liabilities.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'cash_and_equivalents': re.compile(
-                r'cash\s+(?:and\s+)?(?:cash\s+)?equivalents.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'cash\s+(?:and\s+)?(?:cash\s+)?equivalents.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             ),
             'stockholders_equity': re.compile(
-                r'(?:stockholders|shareholders)\s+equity.*?[\$\s]+([\d,\.]+)\s*(?:million|billion)?',
+                r'(?:stockholders|shareholders)\s+equity.*?\$\s*([\d,\.]+)\s*(million|billion)?',
                 re.IGNORECASE
             )
         }
@@ -69,10 +69,9 @@ class FinancialMetricExtractor:
                 try:
                     value = float(value_str)
                     
-                    # Check for billion/million multiplier
-                    context = text[max(0, match.start()-50):match.end()+20]
                     # normalise to millions so all metrics share a common unit scale
-                    if 'billion' in context.lower():
+                    unit = match.group(2) if pattern.groups >= 2 else None
+                    if unit and unit.lower() == 'billion':
                         value *= 1000  # Convert to millions
                         
                     metrics[metric_name] = value
@@ -320,7 +319,11 @@ class SECFilingParser:
             report.append("Financial Metrics (in millions):")
             report.append("-" * 40)
             for metric, value in parsed_data['metrics'].items():
-                report.append(f"  {metric.replace('_', ' ').title()}: ${value:,.1f}M")
+                label = metric.replace('_', ' ').title()
+                if metric == 'earnings_per_share':
+                    report.append(f"  {label}: ${value:,.2f} per share")
+                else:
+                    report.append(f"  {label}: ${value:,.1f}M")
             report.append("")
             
         # Ratios
