@@ -18,6 +18,8 @@ pip install -r requirements.txt
 python examples/quick_analysis.py
 ```
 
+The demo parses a bundled sample 10-K (`MockSECFetcher`). There is no live EDGAR client; pass in filing text you already have.
+
 ## Usage
 
 ```python
@@ -38,8 +40,8 @@ report = parser.generate_report(results)
 
 ## Code Structure
 
-- `src/parser.py` (550+ lines) - Complete parsing system
-- `src/visualizations.py` (300+ lines) - Chart generation
+- `src/parser.py` - Regex metric extraction, lexicon sentiment, entity and risk-factor extraction
+- `src/visualizations.py` - Chart generation
 - `examples/quick_analysis.py` - Demo script
 
 ## What's Extracted
@@ -58,14 +60,5 @@ report = parser.generate_report(results)
 - Sentiment analysis for financial text
 
 Contact: Mike Ichikawa - projects.ichikawa@gmail.com
-
-# 2026-02-01
-# 2026-02-01
-# 2026-02-04
-# 2026-02-06
-# 2026-02-09
-# 2026-02-12
-# 2026-02-15
-# 2026-02-18
 
 > _Note: sentiment lexicons drift over time as financial vocabulary evolves. The bundled lexicon is a snapshot — for production use, plan to refresh at least annually against recent MD&A samples._
